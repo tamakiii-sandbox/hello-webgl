@@ -31,6 +31,13 @@
       const canvas = document.getElementById('canvas');
       const gl = canvas.getContext('webgl');
 
+      let scale = 0.5;
+      const scaleInput = document.getElementById('number');
+      scaleInput.value = 0.5;
+      scaleInput.onchange = (event) => {
+        scale = event.target.value;
+      };
+
       // Create a new shader program
       const vertexShaderSource = `
         attribute vec4 a_position;
@@ -102,7 +109,6 @@
 
         // Create a rotation matrix
         const angleInRadians = time * 0.001;
-        const scale = 0.5;
         const s = Math.sin(angleInRadians) * scale;
         const c = Math.cos(angleInRadians) * scale;
         const matrix = [
@@ -128,13 +134,22 @@
   </script>
   <style type="text/css">
     canvas {
-      width: 100%;
+      width: 50rem;
+      height: 50rem;
     }
   </style>
 </head>
 <body>
   <main>
     <canvas id="canvas"></canvas>
+    <div style="display: grid; grid-template-columns: 1fr 2fr;">
+      <span>
+        scale:
+      </span>
+      <div>
+        <input type="number" step="0.1" value="1.0" id="number" />
+      </div>
+    </div>
   </main>
 </body>
 </html>
